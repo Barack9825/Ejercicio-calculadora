@@ -1,0 +1,50 @@
+*{
+    border-radius: 15px;
+}
+.chasis{
+    width: 400px;
+    background-image: radial-gradient(white,rgb(12, 161, 188));
+    border: 2px solid black;
+    margin: auto;
+}
+.pantalla{
+    box-sizing: border-box;
+    margin: 10px 10px 0 10px;
+    background-color: #f2f2f2;
+    border: 2px solid #777777;
+    display: flex;
+    justify-content: right;
+}
+.pantalla h{
+    color:black;
+    font-size: 30px;
+}
+#botonera{
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.row{
+    width: fit-content;
+    margin: auto;
+}
+.boton{
+    box-sizing: border-box;
+    width: 70px;
+    aspect-ratio: 1;
+    margin:5px;
+    
+
+    background-color: #0000bb;
+    border:2px solid yellow;
+    font-size: 25px;
+    color: white;
+}
+
+.boton:hover{
+    background-color: rgb(69, 223, 22);
+    border:2px solid blue;
+    color: black;
+}
