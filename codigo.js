@@ -38,8 +38,11 @@ for (let simbolo in simbolos) {
 
 
   if (isNaN(caracter)) {
-    clase += 'simbolo'
-    if (((Number(simbolo) + 1) % 4 == 0 && caracter !== '=') || caracter == '%') { clase += (' ' + 'operador') }
+    if (caracter=='%'){
+      clase += caracter
+    }else{
+    clase += 'simbolo'}
+    if (((Number(simbolo) + 1) % 4 == 0 && caracter !== '=') ) { clase += (' ' + 'operador') }
   } else { clase += 'numero' }
 
   boton.id = caracter
@@ -54,7 +57,8 @@ const validarEntrada = (clase) => {
   const tipo = document.getElementsByClassName(clase)
 
   for (const operador of tipo) {
-    if (valor.innerHTML.endsWith(operador.innerHTML)) {
+    
+    if (valor.innerHTML.endsWith(operador.innerHTML))  {
       return true
     }
   }
@@ -79,26 +83,20 @@ const validarPunto = () => {
   else { return true }
 }
 
-const Resolver = () => {
-  
-  /* let resultado ={
-    numero:0,
-    operador:['+','-','*','/'],
-    operando:0
-  } */
-}
 
 const Agregar = (boton) => {
-
+  
   if (valor.innerHTML === '0') {
     if (boton.classList.contains('numero')) {
       valor.innerHTML = boton.innerHTML
     }
-  } else if (boton.classList.contains('numero')) {
+  } else if (boton.classList.contains('numero') && !validarEntrada('%')) {
     valor.innerHTML += boton.innerHTML
-  } else if (boton.classList.contains('operador') && !validarEntrada('simbolo')) {
+  } else if (boton.classList.contains('operador') && !validarEntrada('operador')) {
     valor.innerHTML += boton.innerHTML
-  } else if (boton.id == 'C') {
+  } else if(boton.classList.contains('%') && !validarEntrada('%')){
+    valor.innerHTML += boton.innerHTML
+  }else if (boton.id == 'C') {
     valor.innerHTML = '0'
   } else if (boton.id == '(' && validarEntrada('simbolo')) {
     valor.innerHTML += boton.innerHTML
@@ -110,9 +108,11 @@ const Agregar = (boton) => {
 
     if (buscarSimbolo() !== '') { valor.innerHTML = valor.innerHTML.replace(buscarSimbolo(), buscarSimbolo() + '-') }
     else { valor.innerHTML = '-' + valor.innerHTML }
-  }
-  else if (boton.id == '=') {
-    Resolver()
+  }else if (boton.id == '=') {
+    if (valor.innerHTML.includes('%')){
+      valor.innerHTML=valor.innerHTML.replace('%','/100')
+    }
+    valor.innerHTML=eval(valor.innerHTML)
   }
 
 }
