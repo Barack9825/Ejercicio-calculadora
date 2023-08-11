@@ -89,6 +89,8 @@ const Agregar = (boton) => {
   if (valor.innerHTML === '0') {
     if (boton.classList.contains('numero')) {
       valor.innerHTML = boton.innerHTML
+    }else if (boton.id == '.'){
+      valor.innerHTML+='.'
     }
   } else if (boton.classList.contains('numero') && !validarEntrada('%')) {
     valor.innerHTML += boton.innerHTML
